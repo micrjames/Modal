@@ -1,0 +1,53 @@
+<html>
+   <body>	
+	  <div id="modal" class="hidden">
+		  <div id="modal-header">
+			 <div id="modal-header-close">
+				<i class="fa-solid fa-xmark"></i>
+			 </div>
+			 <div id="modal-header-text">Send me a Message</div>
+		  </div>
+		  <div id="modal-body">
+			 <form name="form" id="form">
+				<fieldset>
+				   <span class="form-control">
+					  <label for="form-name">Subject</label>
+					  <input
+						  id="form-subject"
+						  name="subject"
+						  type="text"
+						  pattern="^[a-zA-Z]+(?:\s[a-zA-Z]+)?$"
+						  placeholder="i.e. Enter your Subject Here"
+					  >
+				  </span>
+				  <span class="form-control">
+					 <label for="form-email">Email</label>
+					 <input
+						  id="form-email"
+						  name="email"
+						  type="email"
+						  pattern="^\w+[\+\.\w-]*@([\w-]+\.)*\w+[\w-]*\.([a-z]{2,4}|\d+)$"
+						  placeholder="i.e. Enter an Email"
+					  >
+				   </span>
+				   <span class="form-control">
+					  <label for="form-body">Body</label>
+					  <textarea
+						  id="form-body"
+						  name="body"
+						  pattern="^[a-zA-Z]+(?:\s[a-zA-Z]+)?$"
+						  placeholder="i.e. Enter your Subject Here"
+					  ></textarea>
+				  </span>
+				  <hr>
+				  <div id="form-btn-group">
+					 <input class="btn" id="form-btn-group-reset" type="reset">
+					 <input class="btn" id="form-btn-group-btn" type="submit" value="Send">
+				  </div>
+			   </fieldset>
+			</form>
+			<output id="modal-output"></output>
+		  </div>
+	   </div>
+   </body>
+</html>
