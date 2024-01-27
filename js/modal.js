@@ -1,6 +1,3 @@
-import { contactContainer } from "./incs.js";
-
-const modal = contactContainer.children.namedItem("modal");
 const modalHdr = modal.children.namedItem("modal-header");
 const modalBody = modal.children.namedItem("modal-body");
 const modalCloseBtn = modalHdr.children.namedItem("modal-header-close");
