@@ -1,5 +1,4 @@
 import { modalBody } from "./modal.js";
-import { swapSpaces } from "./utils.js";
 
 const modalForm = document.forms["form"];
 
@@ -20,5 +19,6 @@ const submitModalForm = function(event) {
     output.textContent = "Email populated";
     this.reset();
 };
+modalForm.addEventListener("submit", submitModalForm);
 
 export { modalForm, submitModalForm };

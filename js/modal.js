@@ -10,5 +10,4 @@ const closeModal = function() {
 const openModal = function() {
     modal.classList.remove("hidden");
 };
-
-export { modalCloseBtn, closeModal, openModal, modalBody };  
+modalCloseBtn.addEventListener("click", closeModal);

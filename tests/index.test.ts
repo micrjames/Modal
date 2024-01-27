@@ -10,11 +10,13 @@ describe("A Modal.", () => {
    let dom: typeof JSDOM;
    let document: Document;
    let modal: typeof Modal;
+   let modalId: string;
    beforeAll(() => {
 	  const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), 'utf8');
 	  dom = new JSDOM(html, {runScript: 'dangerously'});
 	  document = dom.window.document;
-	  modal = new Modal(document.querySelector("#modal"));
+	  modalId = "modal";
+	  modal = new Modal(document.querySelector(`#${modalId}`));
 
 	  // fireEvent.click(...);
    });
@@ -22,17 +24,42 @@ describe("A Modal.", () => {
 	  test("Should be defined.", () => {
 		 expect(modal.modal).toBeDefined(); 
 	  });
-	  test.todo("Should be in the document.");
+	  test("Should be in the document.", () => {
+		 expect(modal.modal).toBeInTheDocument();
+	  });
    });
    describe("A Modal with the correct structure.", () => {
-	  test.todo("Should have each element defined.");
+	  describe("A Modal with the correct structure should have children.", () => {
+		 test("Should have two children.", () => {
+			expect(modal.els).toHaveLength(2);
+		 });
+		 test("Should have each element defined.", () => {
+			for(const el of modal.els)
+			   expect(el).toBeDefined();
+		 });
+	  });
 	  describe("A Modal with the correct structure should have a header.", () => {
-		 test.todo("Should have a header in the document.");
+		 test("Should have a header in the document.", () => {
+			expect(modal.header).toBeInTheDocument();
+		 });
 		 describe("A Modal with a close button in the header.", () => {
-			test.todo("Should be in the document.");
+			let closeBtn: Element;
+			beforeAll(() => {
+			   closeBtn = modal.closeBtn;
+			});
+			test("Should be in the document.", () => {
+			   expect(closeBtn).toBeInTheDocument();
+			});
 			test.todo("Should close the modal.");
 		 });
 		 describe("A Modal with text in the header.", () => {
+			let hdrText: Element;
+			beforeAll(() => {
+			   hdrText = modal.hdrText;
+			});
+			test("Should be in the document.", () => {
+			   expect(hdrText).toBeInTheDocument();
+			});
 			test.todo("Should not be an empty string.");
 			test.todo("Should match the text.");
 		 });
