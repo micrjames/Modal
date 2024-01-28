@@ -17,8 +17,6 @@ describe("A Modal.", () => {
 	  document = dom.window.document;
 	  modalId = "modal";
 	  modal = new Modal(document.querySelector(`#${modalId}`));
-
-	  // fireEvent.click(...);
    });
    describe("A Modal in the document.", () => {
 	  test("Should be defined.", () => {
@@ -26,6 +24,9 @@ describe("A Modal.", () => {
 	  });
 	  test("Should be in the document.", () => {
 		 expect(modal.modal).toBeInTheDocument();
+	  });
+	  test("Should be initially closed.", () => {
+		 expect(modal.isClosed()).toBeTruthy();
 	  });
    });
    describe("A Modal with the correct structure.", () => {
@@ -50,27 +51,62 @@ describe("A Modal.", () => {
 			test("Should be in the document.", () => {
 			   expect(closeBtn).toBeInTheDocument();
 			});
-			test.todo("Should close the modal.");
+			test("Should close the modal if it is opened.", () => {
+			   if(modal.isClosed())
+				  modal.open();
+			   fireEvent.click(closeBtn);
+			   expect(modal.isClosed()).toBeTruthy();
+			});
+			test("Should open the modal if it is closed.", () => {
+			   if(modal.isClosed())
+				  modal.open();
+			   expect(modal.isClosed()).toBeFalsy();
+			});
 		 });
 		 describe("A Modal with text in the header.", () => {
 			let hdrText: Element;
+			let hdrTextTxt: string;
 			beforeAll(() => {
 			   hdrText = modal.hdrText;
+			   hdrTextTxt = hdrText.textContent;
 			});
 			test("Should be in the document.", () => {
 			   expect(hdrText).toBeInTheDocument();
 			});
-			test.todo("Should not be an empty string.");
-			test.todo("Should match the text.");
+			test("Should be a string.", () => {
+			   expect(typeof hdrTextTxt).toBe('string');
+			});
+			test("Should not be an empty string.", () => {
+			   expect(hdrTextTxt).toBeTruthy(); 
+			});
 		 });
 	  });
 	  describe("A Modal with the correct structure should have a body.", () => {
-		 test.todo("Should have a body in the document.");
-		 test.todo("Should have at least one child element.");
+		 let body: Element;
+		 beforeAll(() => {
+			body = modal.body;
+		 });
+		 test("Should be defined.", () => {
+			expect(body).toBeDefined();
+		 });
+		 test("Should have a body in the document.", () => {
+			expect(body).toBeInTheDocument();
+		 });
+		 test("Should have a child element.", () => {
+			expect(body.children.length).toBeTruthy();
+		 });
 	  });
    });
    describe("A Modal whose body contains the correct elements.", () => {
-	  test.todo("Should have an element defined.");
-	  test.todo("Should have an element in the document.");
+	  test("Should have an element defined.", () => {
+		 for(const bodyEl of modal.body.children) {
+			expect(bodyEl).toBeDefined();
+		 }
+	  });
+	  test("Should have an element in the document.", () => {
+		 for(const bodyEl of modal.body.children) {
+			expect(bodyEl).toBeInTheDocument();
+		 }
+	  });
    });
 });
