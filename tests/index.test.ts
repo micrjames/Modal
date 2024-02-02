@@ -32,21 +32,23 @@ describe("A Modal.", () => {
    describe("A Modal with the correct structure.", () => {
 	  describe("A Modal with the correct structure should have children.", () => {
 		 test("Should have two children.", () => {
-			expect(modal.els).toHaveLength(2);
+			expect(modal.modal.children).toHaveLength(2);
 		 });
 		 test("Should have each element defined.", () => {
-			for(const el of modal.els)
+			for(const el of modal.modal.children)
 			   expect(el).toBeDefined();
 		 });
 	  });
 	  describe("A Modal with the correct structure should have a header.", () => {
 		 test("Should have a header in the document.", () => {
-			expect(modal.header).toBeInTheDocument();
+			const header = modal.closeBtn.parentElement;
+			expect(header).toBeInTheDocument();
 		 });
 		 describe("A Modal with a close button in the header.", () => {
 			let closeBtn: Element;
 			beforeAll(() => {
 			   closeBtn = modal.closeBtn;
+			   modal.doOnClose();
 			});
 			test("Should be in the document.", () => {
 			   expect(closeBtn).toBeInTheDocument();
@@ -64,20 +66,28 @@ describe("A Modal.", () => {
 			});
 		 });
 		 describe("A Modal with text in the header.", () => {
-			let hdrText: Element;
-			let hdrTextTxt: string;
+			let hdrText: string;
+			let text: string;
 			beforeAll(() => {
 			   hdrText = modal.hdrText;
-			   hdrTextTxt = hdrText.textContent;
+			   text = "Send me a Message";
 			});
 			test("Should be in the document.", () => {
-			   expect(hdrText).toBeInTheDocument();
+			   const headerTextEl = modal.closeBtn.nextElementSibling;
+			   expect(headerTextEl).toBeInTheDocument();
 			});
 			test("Should be a string.", () => {
-			   expect(typeof hdrTextTxt).toBe('string');
+			   expect(typeof hdrText).toBe('string');
 			});
 			test("Should not be an empty string.", () => {
-			   expect(hdrTextTxt).toBeTruthy(); 
+			   expect(hdrText).toBeTruthy(); 
+			});
+			test("Shoud have given text.", () => {
+			   expect(hdrText).toBe(text);
+			});
+			test("Shoud change the given text.", () => {
+			   hdrText = "Send me a message.";
+			   expect(hdrText).not.toBe(text);
 			});
 		 });
 	  });

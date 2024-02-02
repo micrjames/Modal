@@ -10,12 +10,6 @@ export class Modal {
 	  this._header = this._els[0];
 	  this._body = this._els[1];
 	  this._closeBtn = this._header.children[0];
-	  this._closeBtn.addEventListener("click", () => {
-		 this._modal.classList.add("hidden");
-	  });
-   }
-   get header(): Element {
-	  return this._header;
    }
    get body(): Element {
 	  return this._body;
@@ -23,17 +17,24 @@ export class Modal {
    get closeBtn(): Element {
 	  return this._closeBtn;
    }
-   get hdrText(): Element {
-	  return this._header.children[1];
+   get hdrText(): string {
+	  return this._header.children[1].textContent;
    }
-   get els(): HTMLCollection {
-	  return this._els;
+   set hdrText(text: string) {
+	  this._header.children[1].textContent = text;
    }
    isClosed(): boolean {
 	  return this._modal.classList.contains("hidden");
    }
    open() {
 	  this._modal.classList.remove("hidden");
+   }
+   doOnClose(cb?: () => void) {
+	  this._closeBtn.addEventListener("click", () => {
+		 this._modal.classList.add("hidden");
+		 if(cb)
+			cb();
+	  });
    }
    get modal(): HTMLElement {
 	  return this._modal;
