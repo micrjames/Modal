@@ -61,28 +61,41 @@ modal.open()
 ```
 ## Usage
 
-Once a Modal object is instantiated, we have access to the body of the modal. The elements that are added at that level in the dom:
+Once a Modal object is instantiated, we have access to the body of the modal by:
+```
+modal.body
+```
+These are the elements that are added at that level in the dom:
 ```
 <div id="modal-body">
   <!— add some element here —>
 </div>
 ```
-can be accessed by
+Then, from there, the child elements to the body can be accessed through dom accessors or through other code written to access such items.
 ```
 const bodyChildren = modal.body.children;
 ```
-, for example. Then, from there, the child elements to the body can be accessed through dom accessors or through other code written to access such items. Such as, if a form is placed in the body of the modal, the first child of the modal body can be passed to the Form class.
+Such as, if a form is placed in the body of the modal, the first child of the modal body can be passed to the Form class.
 ```
 const form = new Form(bodyChildren[0]);
 ```
-Furthermore, the header text at the id modal-header-text can be alter by accessing the hdrText method.
+Furthermore, the header text at the id *modal-header-text* can be accessed by calling the hdrText getter.
 ```
-hdrText.textContent = "Send a message.";
+modal.hdrText;
+```
+The header text above can be set by calling the hdrText setter property.
+```
+modal.hdrText = "Send a message.";
 ```
 Also, the status of the modal being closed can be tested.
 ```
 modal.isClosed()
 ```
+The modal can be closed, once it is open, by clicking on the the element at id *modal-header-close*. But, first, the *doOnClose* method must called on the modal object.
+```
+modal.doOnClose();
+```
+There is an optional callback function that can be passed to the *doOnClose* method to specify what is to be accomplish when the modal is closed.
 ## Project Status
 
 This project is completed as long as nothing else can be found to be included in the project to improve the original intention of the project.
