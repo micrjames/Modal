@@ -4,12 +4,12 @@ const path = require("path");
 require("@testing-library/jest-dom");
 import { fireEvent } from "@testing-library/dom";
 
-const { Modal } = require("../Modal");
+import { Modal } from "../Modal";
 
 describe("A Modal.", () => {
    let dom: typeof JSDOM;
    let document: Document;
-   let modal: typeof Modal;
+   let modal: Modal;
    let modalId: string;
    beforeAll(() => {
 	  const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), 'utf8');
