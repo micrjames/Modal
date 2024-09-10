@@ -29,7 +29,7 @@ The functions implemented by the wrapper class allow the user to close the modal
 
 ## Setup
 
-Setting up the project involves first importing, in the case of using the class in a browser-based project, or requiring it, in the case of a node-based project. First, the modal depends on the following html structure:
+Setting up the project involves importing it. First, the modal depends on the following html structure:
 ```
 <html>
    …
@@ -59,6 +59,13 @@ Here, we have created a Modal object by passing in the top-level element that co
 ```
 modal.open()
 ```
+Additionally, we must style the *modal-body*, first. Then, all we must do is add the *sass mixin* at the *modal id selection*:
+```
+#modal {
+    @include modal($width, $bg-color, $text-color, $centered:true, $height:-1, $bg-body-color, $bg-header-color);
+}
+```
+The *modal mixin* configured in this way gives us a modal that is set to have the *close button* on the left side and centered on the page. Otherwise, the given variables are obvious as to what they do.
 ## Usage
 
 Once a Modal object is instantiated, we have access to the body of the modal by:
